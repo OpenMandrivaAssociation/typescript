@@ -7,6 +7,7 @@ URL:            https://www.typescriptlang.org
 Source:         https://registry.npmjs.org/typescript/-/typescript-%{version}.tgz
 BuildArch:      noarch
 BuildRequires:  nodejs
+BuildRequires:	nodejs-packaging
 
 %description
 TypeScript is a language for application-scale JavaScript. TypeScript adds
