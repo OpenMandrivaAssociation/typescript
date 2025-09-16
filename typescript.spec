@@ -4,7 +4,8 @@ Release:        1
 Summary:        A language for application-scale JavaScript
 License:        Apache-2.0
 URL:            https://www.typescriptlang.org
-Source:         https://registry.npmjs.org/typescript/-/typescript-%{version}.tgz
+#Source:         https://registry.npmjs.org/typescript/-/typescript-%{version}.tgz
+Source0:        https://github.com/microsoft/TypeScript/releases/download/v%{version}/%{name}-%{version}.tgz
 BuildArch:      noarch
 BuildRequires:  nodejs
 BuildRequires:	nodejs-packaging
@@ -22,14 +23,13 @@ readable, standards-based JavaScript.
 #sed -e '/#!/ s/node/node-%{_nodejs_major_version}/' -i bin/tsc bin/tsserver
 
 %install
-mkdir -p %{buildroot}%{nodejs_sitelib}/typescript
-cp -pr package.json bin/ lib/ %{buildroot}%{nodejs_sitelib}/typescript
+%nodejs_install
 
-mkdir -p %{buildroot}%{_bindir}
-# this symlink must use the major version path or else it will break after a
-# nodejs major version bump
-ln -s ../lib/node_modules_%{_nodejs_major_version}/typescript/bin/tsc %{buildroot}%{_bindir}/tsc
-ln -s ../lib/node_modules_%{_nodejs_major_version}/typescript/bin/tsserver %{buildroot}%{_bindir}/tsserver
+# Fix shebang lines
+for file in %{buildroot}%{_bindir}/ts* ; do
+    sed -i -e "s|#!%{_bindir}/env node|#!%{_bindir}/node|" $(readlink -f $file)
+done
+
 
 
 %check
