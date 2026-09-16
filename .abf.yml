@@ -1,2 +1,3 @@
 sources:
-  typescript-5.9.2.tgz: d93450cddec5154a2d5cabe3b8102b83316fb2a6
+  typescript-go-7.0.2.tar.gz: 2ae0fdd5f9628164773623c39c0ed2cfe6bcb77c
+  vendor.tar.xz: 994424c223f6c8021693ea6862b21de081900c79
